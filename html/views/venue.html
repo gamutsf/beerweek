@@ -1,0 +1,157 @@
+<div id="list">
+
+<div id="venue-loader" class="loader">
+	<span><img src="https://sfbeerweek.s3-us-west-1.amazonaws.com/images/loader.gif" width="36" height="36"></span>
+</div>
+
+<ul nu-view="venuelist:j" nu-dynamic="true" class="events eventlist nu-invisible">
+	
+	<nu-ifnot lhs="$params.venue;" rhs="">
+		<nu-ifnot lhs="$params.venue;" rhs="all">
+		
+		<sfbw-venue slug="$params.venue;" class="nu-invisible">
+		
+		<!--
+		<nu-json
+			url="http://www.sfbeerweek.org/json/?venue=$params.venue;&view=list"
+			prefix="venue"
+			class="nu-invisible"
+			cachekey="venue-$params.venue;"
+		>		
+			<nu-list key="venue.posts" prefix="post">
+		-->
+			<nu-list key="venue" prefix="post">
+				<nu-if lhs="$post.meta.isfirst;" rhs="true">
+				
+					<li class="listmeta venue-list">
+						<div
+							class="back-btn visibility-web visibility-tablet"
+							nu-action-1="(click) removeclass: expand/.right-column.single-event"
+							nu-action-2="(click) call: returnToOrigin"
+							><span class="ding">&#8216;</span> Back
+						</div>
+						
+						<nu-ifnot lhs="$post.meta.count;" rhs="1">
+							<span><span class="meta-event-count">$post.meta.count;</span> event<span class="plural">s</span></span>
+						</nu-ifnot>
+						
+						<nu-if lhs="$post.meta.count;" rhs="1">
+							<span><span class="meta-event-count">$post.meta.count;</span> event</span>
+						</nu-if>
+						
+						<div
+							class="close-btn ding visibility-web visibility-tablet" 
+							nu-action-1="(click) hideview: single/nu-slide-out-to-right"
+							nu-action-2="(click) removeclass: contract/.columns-container"
+							nu-action-3="(click) removeclass: active/.event"
+							nu-action-4="(click) removeclass: expand/.right-column.single-event"
+							nu-action-5="(click) call: back"
+							>&#8217;
+						</div>
+					</li>
+
+				</nu-if>
+				
+				<!-- Itinerary -->
+				<nu-set key="itineraryclass" value="itinerary-absent" context="application"></nu-set>
+				
+				<nu-if lhs="$post.itinerary;" rhs="1">
+					<nu-set key="itineraryclass" value="itinerary-added" context="application"></nu-set>
+				</nu-if>
+				
+				<!-- Mobile -->
+				<li
+					nu-action-1="(tap) showview: event" 
+					nu-action-1-params="id: $post.id;"
+					nu-action-2="(tap) removeclass: hidden/.single-event .close-btn"
+					nu-action-3="(tap) call: slideDown" 
+					nu-action-4="(tap) toggleclass: hidden/.location-more"
+					nu-action-5="(tap) removeclass: hidden/#single-loader"
+					class="event event-block $itineraryclass; clearfix visibility-mobile" 
+					data-id="$post.id;"
+				>		
+  							
+					<div class="event-icon">
+						<nu-ifnot lhs="$post.icon;" rhs="">
+							<nu-img src="$post.icon;" width="50" height="auto"></nu-img>
+						</nu-ifnot>
+					</div>
+					
+					<div class="event-details">
+						<div class="event-name">$post.title;</div>	
+						<div class="event-venue">$post.venue;</div>
+						<div class="event-address">$post.address;, $post.city;</div>
+						<div class="event-when clearfix">
+							<div class="event-dates">$post.date_slug;</div>
+							<div class="event-time">$post.time_slug;</div>
+						</div>
+						<div class="event-distance visibility-mobile">
+							<nu-distance
+								lat1="$application.latitude;"
+								lon1="$application.longitude;"
+								lat2="$post.lat;"
+								lon2="$post.lng;"
+								prefix="distance"
+							>
+								<nu-numberformat value="$distance.mi;" type="fixed" digits="1" prefix="numberformat">
+									$numberformat.value; mi
+								</nu-numberformat>
+							</nu-distance>
+						</div>
+					</div>
+  				 				
+  			</li>
+  			
+  			<!-- Web/Tablet -->
+  			<li
+					nu-action-1="(tap) showview: eventwrap" 
+					nu-action-1-params="id: $post.id;; slug:; venue:;"
+					nu-action-2="(tap) removeclass: current/.venue #list .event"
+					nu-action-3="(tap) addclass: current/$this"
+					class="event event-block $itineraryclass; clearfix visibility-web visibility-tablet" 
+					data-id="$post.id;"
+				>		
+  							
+					<div class="event-icon">
+						<nu-ifnot lhs="$post.icon;" rhs="">
+							<nu-img src="$post.icon;" width="100%" height="auto"></nu-img>
+						</nu-ifnot>
+					</div>
+					
+					<div class="event-details">
+						<div class="event-name">$post.title;</div>	
+						<div class="event-venue">$post.venue;</div>
+						<div class="event-address">$post.address;, $post.city;</div>
+						<div class="event-when clearfix">
+							<div class="event-dates">$post.date_slug;</div>
+							<div class="event-time">$post.time_slug;</div>
+						</div>
+						<div class="event-distance visibility-mobile">
+							<nu-distance
+								lat1="$application.latitude;"
+								lon1="$application.longitude;"
+								lat2="$post.lat;"
+								lon2="$post.lng;"
+								prefix="distance"
+							>
+								<nu-numberformat value="$distance.mi;" type="fixed" digits="1" prefix="numberformat">
+									$numberformat.value; mi
+								</nu-numberformat>
+							</nu-distance>
+						</div>
+					</div>
+  				 				
+  			</li>		
+  			</nu-list>				
+		<!--
+			</nu-list>
+		</nu-json>
+		-->
+		
+		</sfbw-venue>
+		
+		</nu-ifnot>
+	</nu-ifnot>
+	
+</ul>
+</div>

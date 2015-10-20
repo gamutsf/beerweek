@@ -1,0 +1,561 @@
+<div
+	class="close-btn ding visibility-web" 
+	nu-action-1="(click) hideview: single/nu-slide-out-to-right"
+	nu-action-2="(click) removeclass: contract/.columns-container"
+	nu-action-3="(click) removeclass: active/.event"
+	nu-action-4="(click) removeclass: expand/.right-column.single-event"
+	nu-action-5="(click) call: back"
+	>&#8217;
+</div>
+
+<div id="single-loader" class="loader nu-invisible">
+	<span><img src="https://sfbeerweek.s3-us-west-1.amazonaws.com/images/loader.gif" width="36" height="36"></span>
+</div>
+
+<div nu-view="eventwrap:" nu-dynamic="true" class="details" nu-progress-selector="#single-loader">
+	
+	<nu-ifnot lhs="$params.id;" rhs="">
+	
+		<div nu-view="event:j" nu-dynamic="true" class="event-block event-block-container">
+		
+			<sfbw-event id="$params.id;" track="true" class="nu-invisible">
+			
+				<!-- Sponsored -->
+				<nu-set key="sponsoredclass" value="regular" context="application"></nu-set>
+				
+				<nu-if lhs="$event.sponsor;" rhs="true">
+					<nu-set key="sponsoredclass" value="sponsored" context="application"></nu-set>
+				</nu-if>
+					
+				<div class="event-detail scrollable $sponsoredclass;">
+				
+					<div class="user-actions clearfix visibility-mobile visibility-tablet">
+						<div 
+							class="back-btn"
+							nu-action-1="(tap) hideview: single/nu-slide-out-to-right"
+							nu-action-2="(tap) removeclass: contract/.columns-container"
+							nu-action-3="(tap) removeclass: active/.event"
+							nu-action-4="(tap) removeclass: expand/.right-column.single-event"
+							nu-action-5="(tap) call: back"
+						><span class="ding">&#8216;</span> Back</div>
+						<div class="right">
+							<div 
+								class="facebook-share ding"
+								data-title="$event.title;"
+								data-url="$event.url;"
+								nu-action-1="(tap) call: shareFacebook"
+								nu-action-1-params="name: $event.title;; url: $event.yourls_shorturl;;"
+							>G</div>
+							<div 
+								class="twitter-share ding"
+								data-title="$event.title;"
+								data-url="$event.url;"
+								nu-action-1="(tap) call: shareTwitter"
+								nu-action-1-params="name: $event.title;; url: $event.yourls_shorturl;;"
+							>t</div>
+							
+							<nu-if lhs="$event.itinerary;" rhs="1">
+								<div 
+									class="itinerary ding btn-itinerary itinerary-add hidden"
+									nu-action-1="(tap) call: addToItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;; venue: $event.venue;;"
+								>*</div>
+								<div 
+									class="itinerary ding btn-itinerary itinerary-remove"
+									nu-action-1="(tap) call: removeFromItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;;"
+								>*</div>
+							</nu-if>
+							<nu-if lhs="$event.itinerary;" rhs="0">
+								<div 
+									class="itinerary ding btn-itinerary itinerary-add"
+									nu-action-1="(tap) call: addToItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;; venue: $event.venue;;"
+								>*</div>
+								<div 
+									class="itinerary ding btn-itinerary itinerary-remove hidden"
+									nu-action-1="(tap) call: removeFromItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;;"
+								>*</div>
+							</nu-if>
+							
+						</div>
+					</div>
+				
+					<div class="box clearfix">					
+						<div class="event-icon">
+							<nu-ifnot lhs="$event.icon;" rhs="">
+								<nu-img src="$event.icon;" width="100" height="auto"></nu-img>
+							</nu-ifnot>
+						</div>
+						
+						<div class="event-details">
+							<div class="event-name">$event.title;</div>
+							<div class="event-when clearfix">
+								<div class="event-date">$event.date_slug;</div>
+								<div class="event-time">$event.time_slug;</div>
+							</div>
+						</div>			
+					</div>
+					
+					<div class="box clearfix visibility-web">
+						<div class="left">
+							<div class="social clearfix">							
+								<div class="twitter share" data-url="$event.yourls_shorturl;" data-title="$event.title;"></div>							
+								<div class="facebook share" data-url="$event.yourls_shorturl;" data-title="$event.title;"></div>								
+							</div>
+						</div>
+						<div class="right">
+							<nu-if lhs="$event.itinerary;" rhs="1">
+								<button 
+									class="btn btn-medium btn-success btn-itinerary itinerary-add hidden"
+									nu-action-1="(tap) call: addToItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;; venue: $event.venue;;" 
+								>Add to Itinerary</button>
+								<button 
+									class="btn btn-medium btn-danger btn-itinerary itinerary-remove"
+									nu-action-1="(tap) call: removeFromItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;;" 
+								>Remove from Itinerary</button>
+							</nu-if>
+							<nu-if lhs="$event.itinerary;" rhs="0">
+								<button 
+									class="btn btn-medium btn-success btn-itinerary itinerary-add"
+									nu-action-1="(tap) call: addToItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;; venue: $event.venue;;" 
+								>Add to Itinerary</button>
+								<button 
+									class="btn btn-medium btn-danger btn-itinerary itinerary-remove hidden"
+									nu-action-1="(tap) call: removeFromItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;;" 
+								>Remove from Itinerary</button>
+							</nu-if>
+						</div>
+					</div>
+					
+					<div class="event-map visibility-web visibility-tablet">
+						<div
+							nu-view="map:j"
+							nu-dynamic="true"
+							nu-view-params="address: $event.address;; city: $event.city;; zip: $event.zip;;"
+							data-lat="$event.lat;"
+							data-lng="$event.lng;"
+							data-venue="$event.venue;" 
+							class="map" 
+							style="width:100%; height:300px; -webkit-transform: translateY(0);" 
+						></div>
+				
+				    <i class="map-top visibility-web"></i>
+				    <i class="map-right visibility-web"></i>
+				    <i class="map-bottom visibility-web"></i>
+				    <i class="map-left visibility-web"></i>
+				    
+				    <div class="visibility-web visibility-tablet">
+					    
+					    <!--
+					    <nu-json
+								url="http://www.sfbeerweek.org/json/?venue=$event.venue_slug;&view=list"
+								prefix="venue"
+								class="nu-invisible"
+								cachekey="venue-$event.venue_slug;"
+							>		
+							
+								<nu-ifnot lhs="$venue.count_total;" rhs="1">
+							-->
+				    
+									<div class="location-more" data-id="$event.id;"
+										nu-action-1="(tap) addclass: expand/.right-column.single-event"
+										nu-action-2="(tap) removeclass: hidden/#venue-loader"
+										nu-action-3="(tap) showview: venueevents"
+										nu-action-3-params="id: $event.id;; venue: $event.venue_slug;;"
+										nu-action-4="(tap) call: saveOrigin"
+										nu-action-4-params="origin: $event.id;;"
+									>
+										<div class="cta">
+											<span class="ding">,</span> More at this location
+										</div>
+									</div>
+								
+							<!--
+								</nu-ifnot>
+							
+					    </nu-json>
+					    -->
+					    
+						</div>
+					</div>
+					
+					<div class="visibility-web visibility-tablet">
+						<nu-ifnot lhs="$event.website;" rhs="">
+							<div class="event-description event-website"><span class="bold">Website:</span> <a href="$event.website;" target="_blank">$event.website;</a></div>
+						</nu-ifnot>
+						
+						<nu-ifnot lhs="$event.admission;" rhs="">
+							<div class="event-description event-admission"><span class="bold">Admission:</span> $event.admission;</div>
+						</nu-ifnot>
+					</div>
+					
+					<div class="event-description nl2br">$event.description;</div>
+					
+					<div class="visibility-mobile">
+						<nu-ifnot lhs="$event.website;" rhs="">
+							<div class="event-description event-website"><span class="bold">Website:</span> <a href="$event.website;" target="_blank">$event.website;</a></div>
+						</nu-ifnot>
+						
+						<nu-ifnot lhs="$event.admission;" rhs="">
+							<div class="event-description event-admission"><span class="bold">Admission:</span> $event.admission;</div>
+						</nu-ifnot>
+					</div>
+				</div>
+					
+			</sfbw-event>
+		
+		</div> <!-- event: -->
+		
+		<div class="event-map scrollable visibility-mobile">
+		
+			<sfbw-event id="$params.id;" class="nu-invisible">
+	
+				<div class="location-details visibility-mobile">
+				
+					<div class="location-more" data-id="$event.id;"
+						nu-action-1="(tap) removeclass: hidden/.single-event .venue"
+						nu-action-2="(tap) showview: venuelist"
+						nu-action-2-params="id: $event.id;; venue: $event.venue_slug;;"
+						nu-action-3="(tap) call: slideUp"
+						nu-action-4="(tap) addclass: hidden/.single-event .close-btn"
+						nu-action-5="(tap) toggleclass: hidden/.single-event .location-more"
+						nu-action-6="(tap) removeclass: hidden/#venue-loader"
+						nu-action-7="(tap) addclass: expanded/.single-event .details"
+					>
+						<div class="cta">
+							<span class="ding">,</span> More at this location
+						</div>
+					</div>
+					
+					<div class="location-more hidden">
+						<div class="cta">
+							<span 
+								class="venue-back"
+								nu-action-1="(tap) hideview: single/nu-slide-out-to-right"
+								nu-action-2="(tap) removeclass: contract/.columns-container"
+								nu-action-3="(tap) removeclass: active/.event"
+								nu-action-4="(tap) removeclass: expanded/.single-event .details"
+								nu-action-5="(tap) removeclass: expand/.right-column.single-event"
+								nu-action-6="(tap) call: back"
+							><span class="ding">&#8216;</span> Back</span>
+							<span 
+								class="venue-close"
+								nu-action-1="call: slideDown"
+								nu-action-2="(tap) toggleclass: hidden/.location-more"
+								nu-action-3="(tap) removeclass: hidden/.single-event .close-btn"
+								nu-action-4="(tap) removeclass: expanded/.single-event .details"
+							>&times;</span>
+						</div>
+					</div>
+					
+				</div>
+			
+				<div
+					nu-view="map:j"
+					nu-dynamic="true"
+					nu-view-params="address: $event.address;; city: $event.city;; zip: $event.zip;;"
+					data-lat="$event.lat;"
+					data-lng="$event.lng;"
+					data-venue="$event.venue;" 
+					class="map" 
+					style="width:100%; height:300px; -webkit-transform: translateY(0);" 
+				></div>
+		
+		    <i class="map-top visibility-web"></i>
+		    <i class="map-right visibility-web"></i>
+		    <i class="map-bottom visibility-web"></i>
+		    <i class="map-left visibility-web"></i>
+	    
+			</sfbw-event>
+			
+			<div nu-view="venue:hc" class="venue hidden"></div>
+			
+		</div>	
+	
+	</nu-ifnot>
+	
+	
+	<!-- Direct Version -->
+	
+	<nu-ifnot lhs="$params.slug;" rhs="">
+	
+		<div nu-view="event:j" nu-dynamic="true" class="event-block event-block-container">
+		
+			<sfbw-event id="$params.slug;" track="true" class="nu-invisible">
+			
+			<!--
+			<nu-json
+				url="http://www.sfbeerweek.org/json/?event=$params.slug;"
+				prefix="event"
+				class="nu-invisible"
+				cachekey="event-$params.slug;"
+			>  			
+				<nu-list key="event.posts" prefix="event" limit="1">
+			-->
+			
+				<!-- Sponsored -->
+				<nu-set key="sponsoredclass" value="regular" context="application"></nu-set>
+				
+				<nu-if lhs="$event.sponsor;" rhs="true">
+					<nu-set key="sponsoredclass" value="sponsored" context="application"></nu-set>
+				</nu-if>
+					
+				<div class="event-detail scrollable $sponsoredclass;">
+				
+					<div class="user-actions clearfix visibility-mobile visibility-tablet">
+						<div 
+							class="back-btn"
+							nu-action-1="(tap) hideview: single/nu-slide-out-to-right"
+							nu-action-2="(tap) removeclass: contract/.columns-container"
+							nu-action-3="(tap) removeclass: active/.event"
+							nu-action-4="(tap) call: back"
+						><span class="ding">&#8216;</span> Back</div>
+						<div class="right">
+							<div 
+								class="facebook-share ding"
+								data-title="$event.title;"
+								data-url="$event.url;"
+								nu-action-1="(tap) call: shareFacebook"
+								nu-action-1-params="name: $event.title;; url: $event.yourls_shorturl;;"
+							>G</div>
+							<div 
+								class="twitter-share ding"
+								data-title="$event.title;"
+								data-url="$event.url;"
+								nu-action-1="(tap) call: shareTwitter"
+								nu-action-1-params="name: $event.title;; url: $event.yourls_shorturl;;"
+							>t</div>
+							
+							<nu-if lhs="$event.itinerary;" rhs="1">
+								<div 
+									class="itinerary ding btn-itinerary itinerary-add hidden"
+									nu-action-1="(tap) call: addToItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;; venue: $event.venue;;"
+								>*</div>
+								<div 
+									class="itinerary ding btn-itinerary itinerary-remove"
+									nu-action-1="(tap) call: removeFromItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;;"
+								>*</div>
+							</nu-if>
+							<nu-if lhs="$event.itinerary;" rhs="0">
+								<div 
+									class="itinerary ding btn-itinerary itinerary-add"
+									nu-action-1="(tap) call: addToItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;; venue: $event.venue;;"
+								>*</div>
+								<div 
+									class="itinerary ding btn-itinerary itinerary-remove hidden"
+									nu-action-1="(tap) call: removeFromItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;;"
+								>*</div>
+							</nu-if>
+							
+						</div>
+					</div>
+				
+					<div class="box clearfix">					
+						<div class="event-icon">
+							<nu-ifnot lhs="$event.icon;" rhs="">
+								<nu-img src="$event.icon;" width="100" height="auto"></nu-img>
+							</nu-ifnot>
+						</div>
+						
+						<div class="event-details">
+							<div class="event-name">$event.title;</div>
+							<div class="event-when clearfix">
+								<div class="event-date">$event.date_slug;</div>
+								<div class="event-time">$event.time_slug;</div>
+							</div>
+						</div>			
+					</div>
+					
+					<div class="box clearfix visibility-web">
+						<div class="left">
+							<div class="social clearfix">							
+								<div class="twitter share" data-url="$event.yourls_shorturl;" data-title="$event.title;"></div>							
+								<div class="facebook share" data-url="$event.yourls_shorturl;" data-title="$event.title;"></div>								
+							</div>
+						</div>
+						<div class="right">
+							<nu-if lhs="$event.itinerary;" rhs="1">
+								<button 
+									class="btn btn-medium btn-success btn-itinerary itinerary-add hidden"
+									nu-action-1="(tap) call: addToItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;; venue: $event.venue;;" 
+								>Add to Itinerary</button>
+								<button 
+									class="btn btn-medium btn-danger btn-itinerary itinerary-remove"
+									nu-action-1="(tap) call: removeFromItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;;" 
+								>Remove from Itinerary</button>
+							</nu-if>
+							<nu-if lhs="$event.itinerary;" rhs="0">
+								<button 
+									class="btn btn-medium btn-success btn-itinerary itinerary-add"
+									nu-action-1="(tap) call: addToItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;; venue: $event.venue;;" 
+								>Add to Itinerary</button>
+								<button 
+									class="btn btn-medium btn-danger btn-itinerary itinerary-remove hidden"
+									nu-action-1="(tap) call: removeFromItinerary"
+									nu-action-1-params="id: $event.id;; title: $event.title;;" 
+								>Remove from Itinerary</button>
+							</nu-if>
+						</div>
+					</div>
+					
+					<div class="event-map visibility-web visibility-tablet">
+						<div
+							nu-view="map:j"
+							nu-dynamic="true"
+							nu-view-params="address: $event.address;; city: $event.city;; zip: $event.zip;;"
+							data-lat="$event.lat;"
+							data-lng="$event.lng;"
+							data-venue="$event.venue;" 
+							class="map" 
+							style="width:100%; height:300px; -webkit-transform: translateY(0);" 
+						></div>
+				
+				    <i class="map-top visibility-web"></i>
+				    <i class="map-right visibility-web"></i>
+				    <i class="map-bottom visibility-web"></i>
+				    <i class="map-left visibility-web"></i>
+				    
+				    <div class="visibility-web visibility-tablet">
+							<div class="location-more" data-id="$event.id;"
+								nu-action-1="(tap) addclass: expand/.right-column.single-event"
+								nu-action-2="(tap) removeclass: hidden/#venue-loader"
+								nu-action-3="(tap) showview: venueevents"
+								nu-action-3-params="id: $event.id;; venue: $event.venue_slug;;"
+								nu-action-4="(tap) call: saveOrigin"
+								nu-action-4-params="origin: $event.id;;"
+							>
+								<div class="cta">
+									<span class="ding">,</span> More at this location
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="visibility-web visibility-tablet">
+						<nu-ifnot lhs="$event.website;" rhs="">
+							<div class="event-description event-website"><span class="bold">Website:</span> <a href="$event.website;" target="_blank">$event.website;</a></div>
+						</nu-ifnot>
+						
+						<nu-ifnot lhs="$event.admission;" rhs="">
+							<div class="event-description event-admission"><span class="bold">Admission:</span> $event.admission;</div>
+						</nu-ifnot>
+					</div>
+					
+					<div class="event-description nl2br">$event.description;</div>
+					
+					<div class="visibility-mobile">
+						<nu-ifnot lhs="$event.website;" rhs="">
+							<div class="event-description event-website"><span class="bold">Website:</span> <a href="$event.website;" target="_blank">$event.website;</a></div>
+						</nu-ifnot>
+						
+						<nu-ifnot lhs="$event.admission;" rhs="">
+							<div class="event-description event-admission"><span class="bold">Admission:</span> $event.admission;</div>
+						</nu-ifnot>
+					</div>
+				</div>
+					
+			<!--
+				</nu-list>
+			</nu-json>
+			-->
+			
+			</sfbw-event>
+		
+		</div> <!-- event: -->
+		
+		<div class="event-map scrollable visibility-mobile">
+		
+			<sfbw-event id="$params.slug;" class="nu-invisible">
+			
+			<!--
+			<nu-json
+				url="http://www.sfbeerweek.org/json/?event=$params.slug;"
+				prefix="event"
+				class="nu-invisible"
+				cachekey="event-$params.slug;"
+			>  			
+				<nu-list key="event.posts" prefix="event" limit="1">
+			-->
+	
+				<div class="location-details visibility-mobile">
+				
+					<div class="location-more" data-id="$event.id;"
+						nu-action-1="(tap) removeclass: hidden/.single-event .venue"
+						nu-action-2="(tap) showview: venuelist"
+						nu-action-2-params="id: $event.id;; venue: $event.venue_slug;;"
+						nu-action-3="(tap) call: slideUp"
+						nu-action-4="(tap) addclass: hidden/.single-event .close-btn"
+						nu-action-5="(tap) toggleclass: hidden/.single-event .location-more"
+						nu-action-6="(tap) removeclass: hidden/#venue-loader"
+						nu-action-7="(tap) addclass: expanded/.single-event .details"
+					>
+						<div class="cta">
+							<span class="ding">,</span> More at this location
+						</div>
+					</div>
+					
+					<div class="location-more hidden">
+						<div class="cta">
+							<span 
+								class="venue-back"
+								nu-action-1="(tap) hideview: single/nu-slide-out-to-right"
+								nu-action-2="(tap) removeclass: contract/.columns-container"
+								nu-action-3="(tap) removeclass: active/.event"
+								nu-action-4="(tap) removeclass: expanded/.single-event .details"
+								nu-action-5="(tap) call: back"
+							><span class="ding">&#8216;</span> Back</span>
+							<span 
+								class="venue-close"
+								nu-action-1="call: slideDown"
+								nu-action-2="(tap) toggleclass: hidden/.location-more"
+								nu-action-3="(tap) removeclass: hidden/.single-event .close-btn"
+								nu-action-4="(tap) removeclass: expanded/.single-event .details"
+							>&times;</span>
+						</div>
+					</div>
+					
+				</div>
+			
+				<div
+					nu-view="map:j"
+					nu-dynamic="true"
+					nu-view-params="address: $event.address;; city: $event.city;; zip: $event.zip;;"
+					data-lat="$event.lat;"
+					data-lng="$event.lng;"
+					data-venue="$event.venue;" 
+					class="map" 
+					style="width:100%; height:300px; -webkit-transform: translateY(0);" 
+				></div>
+		
+		    <i class="map-top visibility-web"></i>
+		    <i class="map-right visibility-web"></i>
+		    <i class="map-bottom visibility-web"></i>
+		    <i class="map-left visibility-web"></i>
+	    
+			</sfbw-event>
+			<!--
+				</nu-list>
+			</nu-json>
+			-->
+			
+			<div nu-view="venue:hc" class="venue hidden"></div>
+			
+		</div>	
+	
+	</nu-ifnot>
+		
+</div>
+	

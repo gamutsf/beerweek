@@ -1,0 +1,347 @@
+<div class="content">
+	<div 
+		class="ding close-btn"
+		nu-action-1="(tap) hideview: overlay"
+		nu-action-2="(tap) removeclass: active/.sub-nav li.selector"
+	>&#8217;</div>
+</div>
+
+<nu-if lhs="$params.section;" rhs="navigation">
+	<ul>
+		<li>Schedule</li>
+		<li>Sponsors</li>
+		<li>Venues</li>
+		<li>Lists</li>
+		<li>Lodging</li>
+		<li>Transportation</li>
+		<li>Assets</li>
+		<li>Contact</li>
+	</ul>
+</nu-if>
+
+<nu-if lhs="$params.filter-type;" rhs="region">
+	<div class="region-selector parent-selector">
+		<div class="options-container clearfix">
+			<div class="title">
+				Show events in 
+				<span class="get-location visibility-web">Get current location</span>
+			</div>
+			<div class="region selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="region: all;">
+				<div class="icon"></div>
+				<div class="all-text text">All Regions</div>
+			</div>
+			<div class="region selector active"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="region: san-francisco;">
+				<div class="icon"></div>
+				<div class="all-text text">San Francisco</div>
+			</div>
+			<div class="region selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="region: east-bay;">
+				<div class="icon"></div>
+				<div class="all-text text">East Bay</div>
+			</div>
+			<div class="region selector" style="margin-left: 50px;"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="region: north-bay;">
+				<div class="icon"></div>
+				<div class="all-text text">North Bay</div>
+			</div>
+			<div class="region selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="region: south-bay;">
+				<div class="icon"></div>
+				<div class="all-text text">South Bay</div>
+			</div>
+		</div>
+	</div>
+</nu-if>
+
+<nu-if lhs="$params.filter-type;" rhs="date">
+	<div class="date-selector parent-selector">
+		<div class="options-container clearfix">
+			<div class="title">
+				Show events on
+				<span class="get-today visibility-web">Today</span>
+			</div>
+			<div class="date selector active"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="date: all;"
+				nu-action-5="(tap) removeclass: hidden/.sponsorheader">
+				<div class="icon">All</div>
+				<div class="text">
+					<div class="weekday">Dates</div>
+				</div>
+			</div>
+			<div class="date selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="date: 7;"
+				nu-action-5="(tap) addclass: hidden/.sponsorheader">
+				<div class="icon">7</div>
+				<div class="text">
+					<div class="weekday">Fri</div>
+				</div>
+			</div>
+			<div class="date selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="date: 8;"
+				nu-action-5="(tap) removeclass: hidden/.sponsorheader">
+				<div class="icon">8</div>
+				<div class="text">
+					<div class="weekday">Sat</div>
+				</div>
+			</div>
+			<div class="date selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="date: 9;"
+				nu-action-5="(tap) removeclass: hidden/.sponsorheader">
+				<div class="icon">9</div>
+				<div class="text">
+					<div class="weekday">Sun</div>
+				</div>
+			</div>
+			<div class="date selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="date: 10;"
+				nu-action-5="(tap) removeclass: hidden/.sponsorheader">
+				<div class="icon">10</div>
+				<div class="text">
+					<div class="weekday">Mon</div>
+				</div>
+			</div>
+			<div class="date selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="date: 11;"
+				nu-action-5="(tap) removeclass: hidden/.sponsorheader">
+				<div class="icon">11</div>
+				<div class="text">
+					<div class="weekday">Tue</div>
+				</div>
+			</div>			
+			<div class="date selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="date: 12;"
+				nu-action-5="(tap) removeclass: hidden/.sponsorheader">
+				<div class="icon">12</div>
+				<div class="text">
+					<div class="weekday">Wed</div>
+				</div>
+			</div>
+			<div class="date selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="date: 13;"
+				nu-action-5="(tap) removeclass: hidden/.sponsorheader">
+				<div class="icon">13</div>
+				<div class="text">
+					<div class="weekday">Thur</div>
+				</div>
+			</div>
+			<div class="date selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="date: 14;"
+				nu-action-5="(tap) removeclass: hidden/.sponsorheader">
+				<div class="icon">14</div>
+				<div class="text">
+					<div class="weekday">Fri</div>
+				</div>
+			</div>			
+			<div class="date selector" style="margin-left: 50px;"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="date: 15;"
+				nu-action-5="(tap) removeclass: hidden/.sponsorheader">
+				<div class="icon">15</div>
+				<div class="text">
+					<div class="weekday">Sat</div>
+				</div>
+			</div>
+			<div class="date selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="date: 16;"
+				nu-action-5="(tap) removeclass: hidden/.sponsorheader">
+				<div class="icon">16</div>
+				<div class="text">
+					<div class="weekday">Sun</div>
+				</div>
+			</div>		
+		</div>	
+	</div>
+</nu-if>
+
+<nu-if lhs="$params.filter-type;" rhs="type">
+	<div class="type-selector parent-selector">
+		<div class="options-container clearfix">
+			<div class="title">Show events like</div>
+			<div class="type selector" 
+				nu-action-1="(tap) removeclass: active/.selector"
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="type: all;">
+				<div class="all-text text">All Event Types</div>
+			</div>
+			<div class="type selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="type: beer-dinner;">
+				<div class="all-text text">Beer Dinner</div>
+			</div>
+			<div class="type selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="type: beer-style-theme;">
+				<div class="all-text text">Beer Style Theme</div>
+			</div>
+			<div class="type selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="type: educational;">
+				<div class="all-text text" style="font-size: 11px; top: 1px;">Educational</div>
+			</div>
+			<div class="type selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="type: festival;">
+				<div class="all-text text">Festival</div>
+			</div>
+			<div class="type selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="type: fundraiser;">
+				<div class="all-text text">Fundraiser</div>
+			</div>
+			<div class="type selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="type: meet-the-brewers;">
+				<div class="all-text text">Meet the Brewers</div>
+			</div>
+			<div class="type selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="type: outdoor-activity;">
+				<div class="all-text text">Outdoor Activity</div>
+			</div>
+			<div class="type selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="type: special-release;">
+				<div class="all-text text">Special Release</div>
+			</div>
+			<div class="type selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="type: tap-takeover;">
+				<div class="all-text text">Tap Takeover</div>
+			</div>
+			<div class="type selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="type: tour;">
+				<div class="all-text text">Tour</div>
+			</div>
+			<div class="type selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="type: sponsored-events;">
+				<div class="all-text text">Sponsored Events</div>
+			</div>
+		</div>
+	</div>
+</nu-if>
+
+<nu-if lhs="$params.filter-type;" rhs="time">
+	<div class="time-selector parent-selector">
+		<div class="options-container clearfix">
+			<div class="title">Show events during</div>		
+			<div class="time selector" 
+				nu-action-1="(tap) removeclass: active/.selector"
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="time: all;">
+				<div class="all-text text">All Times</div>
+			</div>
+			<div class="time selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="time: morning;">
+				<div class="all-text text">Morning</div>
+			</div>
+			<div class="time selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="time: afternoon;">
+				<div class="all-text text">Afternoon</div>
+			</div>
+			<div class="time selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="time: evening;">
+				<div class="all-text text">Evening</div>
+			</div>
+			<div class="time selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="time: late;">
+				<div class="all-text text">Late Night</div>
+			</div>
+			<div class="time selector"
+				nu-action-1="(tap) removeclass: active/.selector" 
+				nu-action-2="(tap) addclass: active/$this"
+				nu-action-3="(tap) hideview: overlay"
+				nu-action-4="(tap) showview: eeljson" nu-action-4-params="time: now;">
+				<div class="all-text text">Right Now</div>
+			</div>
+		</div>		
+	</div>
+</nu-if>
+
+

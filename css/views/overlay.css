@@ -1,0 +1,283 @@
+@media screen and (min-width: 768px ) {
+
+	.overlay {
+		width: 100%;
+		background: #FFF;
+		height: 300px;
+		position: fixed;
+		top: 120px;
+		z-index: 2;
+		box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.2);
+	}
+		/*
+		.overlay:after {
+			content: '';
+			position: absolute;
+			bottom: 0px;
+			height:100vh;
+			width: 100%;
+			background: #032B38;
+			opacity: 0.5;
+		}
+		*/
+		.overlay .content {
+			max-width: 1100px;
+			width: 92%;
+			margin: 0 auto;
+			position: relative;
+		}
+		.overlay .close-btn {
+			position: absolute;
+			right: 0px;
+			font-size: 60px;
+			color: #0B85A4;
+			z-index: 10;
+			cursor: pointer;
+			top: 2px;
+		}
+		
+		.overlay .options-container {
+			display: table;
+			max-width: 1100px;
+			margin: 0 auto;
+			width: 92%;
+			position: relative;
+		}
+			.overlay .options-container .icon {
+				position: relative;
+				width: 100px;
+				height: 100px;
+				background: lightgray;
+				margin: 0 auto;
+				border-radius: 50%;
+				top: 30px;
+			}
+			.overlay .options-container .title {
+				position: absolute;
+				width: 100%;
+				text-align: left;
+				top: 18px;
+				font-size: 40px;
+				font-family: 'signpainter';
+				max-width: 1100px;
+				margin: 0 auto;
+				color: #0B85A4;
+				border-bottom: 1px solid #DEDEDE;
+				font-weight: 200;
+				z-index: 2;
+				text-indent: 15px;
+				padding-bottom: 6px;
+				line-height: 32px;
+				padding-top: 12px;
+			}
+				.overlay .options-container .title span {
+					font-family: Helvetica, Arial, sans-serif;
+					font-size: 14px;
+					margin-left: 15px;
+					color: #0B85A4;
+					padding: 6px 12px;
+					border: 1px solid #0B85A4;
+					border-radius: 4px;
+					top: -6px;
+					position: relative;
+					cursor: pointer;
+					display: inline !important;
+				}
+					.overlay .options-container .title span:hover {
+						background: #0B85A4;
+						color: white;
+					}
+			.overlay .options-container .selector {
+				display: table-cell;
+				text-align: center;
+				height: 206px;
+				position: relative;
+				width: auto;
+				top: 68px;
+				cursor: pointer;
+				color: #032B38;
+				font-family: "HelveticaNeueThin", "HelveticaNeue-Thin", "Helvetica Neue Thin", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Arial", sans-serif;
+			}
+				.overlay .options-container .selector:hover {
+					color: #0B85A4;
+				}
+				.overlay .options-container .selector.active {
+					color: #D55A1D;
+				}
+					.overlay .options-container .selector:hover .icon {}
+					.overlay .options-container .selector:hover .text {}
+				.overlay .options-container .selector .text {
+					position: absolute;
+					width: 100%;
+					bottom: 20px;
+					font-size: 18px;
+					color: inherit;
+				}
+				
+				.overlay .region-selector .options-container .selector {
+					width: 20%;
+				}
+					.overlay .region-selector .options-container .selector {}
+					.overlay .region-selector .options-container .selector:hover .icon {
+						background: #0B85A4;
+						color: #0B85A4;
+					}
+						.overlay .region-selector .options-container .selector.active .icon {
+							background: #D55A1D;
+							color: #D55A1D;
+						}
+				.overlay .date-selector .options-container .selector {
+					width: 9.09%;
+				}
+					.overlay .date-selector .options-container .selector .icon {
+						background: none;
+						display: table-cell;
+						vertical-align: middle;
+						top: 30px;
+						font-size: 48px;
+						color: #032B38;
+						position: relative;
+					}
+						.overlay .date-selector .options-container .selector:hover .icon {
+							color: #0B85A4;
+						}
+						.overlay .date-selector .options-container .selector.active .icon {
+							color: white;
+						}
+							.overlay .date-selector .options-container .selector.active .icon:after {
+								content: '';
+								position: absolute;
+								width: 80px;
+								height: 80px;
+								border-radius: 50%;
+								background: #D55A1D;
+								margin-left: -40px;
+								z-index: -1;
+								top: 8px;
+								left: 50%;
+							}
+					.overlay .date-selector .options-container .selector .text {
+						/* bottom: 60px; */
+					}
+			
+			.overlay .options-container .selector.active .text {
+				color: #D55A1D;
+			}
+
+}
+
+@media screen and (max-width: 767px ) {
+
+.overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	background-color: rgba(0,0,0,0.9);
+	z-index: 999999 !important;
+	font-weight: 400; 
+	font-stretch: normal; 
+	color: #fff;
+	overflow: scroll;
+}
+
+	.overlay .close-btn {
+		position: fixed;
+		right: 12px;
+		top: -15px;
+		font-size: 60px;
+		color: white;
+		z-index: 10;
+	}
+	
+	.overlay ul {
+		margin-top: 50px;
+	}
+		.overlay ul li {
+			padding: 12px 15px;
+			/* border-top: 1px solid #FFF; */
+			font-size: 21px;
+		}
+		.overlay ul li:last-child {
+			/* border-bottom: 1px solid #FFF; */
+		}
+
+	.overlay .title {
+		margin-top: 30px;
+		width: 100%;
+		text-align: center;
+		font-size: 24px;
+		margin-bottom: 14px;
+		font-family: "HelveticaNeueThin", "HelveticaNeue-Thin", "Helvetica Neue Thin", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Arial", sans-serif;
+	}
+	
+	.overlay .parent-selector {
+		display: table;
+		vertical-align: middle;
+		height: -webkit-calc(100% - 22px);
+		position: relative;
+		width: 276px;
+		margin: 0 auto;
+	}
+	
+	.overlay .options-container {
+		width: 100%;
+		position: relative;
+		display: table-cell;
+		vertical-align: middle;
+	}
+	
+	.overlay .selector {
+		border: 2px solid #158ba9;
+		width: 82px;
+		height: 82px;
+		border-radius: 50%;
+		margin: 0 5px 10px 5px;
+		float: left;
+		text-align: center;
+		font-size: 10.5px;
+		box-sizing: border-box;
+		padding: 10px;
+		display: table-cell;
+		vertical-align: middle;
+	}
+		.overlay .selector:active, 
+		.overlay .selector.active {
+			background-color: #158ba9;
+		}
+		
+	.overlay .text {
+		font-size: 12px;
+		line-height: 13px; 
+		height: 56px;
+		position: relative;
+		width: 82px;
+		display: table-cell;
+		vertical-align: middle;
+	}
+	
+	.overlay .date-selector {}
+	
+	.overlay .date-selector .date-container {
+		margin: 30px auto;
+		width: 300px;
+	}
+	
+	.overlay .date-selector .weekday { 
+		position: relative;
+		top: -26px;
+	}
+		
+	.overlay .date-selector .icon {
+		font-size: 36px;
+		font-family: "HelveticaNeueThin", "HelveticaNeue-Thin", "Helvetica Neue Thin", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Arial", sans-serif;
+	}
+	
+	.overlay .time-selector {
+	}
+	
+	.overlay .time-selector .nu-element {
+		font-size:110px;
+	}
+	
+}

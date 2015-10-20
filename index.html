@@ -1,0 +1,466 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>SF Beer Week 2015</title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=0">
+		
+		<link rel="stylesheet" type="text/css" media="all" nu-href="neutrino/css/neutrino.css" class="nu-browser-neutral-css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" media="screen" href="style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="js/lib/jquery.js" type="text/javascript"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+		<script src="neutrino/js/neutrino.js" type="text/javascript"></script>
+		<script src="js/views/eel.js" type="text/javascript"></script>
+		<script src="js/taglets/event-taglet.js" type="text/javascript"></script>
+		<!-- <script src="js/lib/iscroll-lite.js" type="text/javascript"></script> -->
+		<script src="js/application.js" type="text/javascript"></script>
+
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    
+    <script type="text/javascript">
+    
+    // HACK polyfill for IE custom event support
+	  window.CustomEvent = '';
+	  
+	  (function () {
+		  function CustomEvent ( event, params ) {
+		    params = params || { bubbles: false, cancelable: false, detail: undefined };
+		    var evt = document.createEvent( 'CustomEvent' );
+		    evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+		    return evt;
+		   };
+		
+		  CustomEvent.prototype = window.CustomEvent.prototype;
+		
+		  window.CustomEvent = CustomEvent;
+		})();
+		
+		
+		/**
+		 * ScrollFix v0.1
+		 * http://www.joelambert.co.uk
+		 *
+		 * Copyright 2011, Joe Lambert.
+		 * Free to use under the MIT license.
+		 * http://www.opensource.org/licenses/mit-license.php
+		 */
+		
+		var ScrollFix = function(elem) {
+			// Variables to track inputs
+			var startY, startTopScroll;
+			
+			elem = elem || document.querySelector(elem);
+			
+			// If there is no element, then do nothing	
+			if(!elem)
+				return;
+		
+			// Handle the start of interactions
+			elem.addEventListener('touchstart', function(event){
+				startY = event.touches[0].pageY;
+				startTopScroll = elem.scrollTop;
+				
+				if(startTopScroll <= 0)
+					elem.scrollTop = 1;
+		
+				if(startTopScroll + elem.offsetHeight >= elem.scrollHeight)
+					elem.scrollTop = elem.scrollHeight - elem.offsetHeight - 1;
+			}, false);
+		};
+		
+		
+		// Better resizing
+		(function($,sr){
+		
+		  // debouncing function from John Hann
+		  // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
+		  var debounce = function (func, threshold, execAsap) {
+		      var timeout;
+		
+		      return function debounced () {
+		          var obj = this, args = arguments;
+		          function delayed () {
+		              if (!execAsap)
+		                  func.apply(obj, args);
+		              timeout = null;
+		          };
+		
+		          if (timeout)
+		              clearTimeout(timeout);
+		          else if (execAsap)
+		              func.apply(obj, args);
+		
+		          timeout = setTimeout(delayed, threshold || 300);
+		      };
+		  }
+		  // smartresize 
+		  jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
+		
+		})(jQuery,'smartresize');
+    
+    
+    // MAINLINE
+    
+    function
+		checkViewport ()
+		{
+			var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+			
+			if( document.documentElement.clientWidth > 1099 ){
+				var size = 'isWeb';
+			}
+			else
+			if( (document.documentElement.clientWidth <= 1099) && (document.documentElement.clientWidth >= 768) ){
+				var size = 'isTablet';
+			}
+			else
+			if( document.documentElement.clientWidth < 768 ){
+				var size = 'isHandheld';
+			}
+			
+			document.getElementsByTagName('html')[0].className = '';
+	    document.getElementsByTagName('html')[0].className+= size;
+		}
+		
+		function
+		removeCache ()
+		{
+			console.log ("removeCache()");
+			
+			for (var key in localStorage)
+			{
+				if (key.length > 4)
+				{
+					if (key.substr (0, 8) == "sfbw2015")
+					{
+						// console.log ("removing " + key);
+						delete localStorage [key];
+					}
+				}
+			}
+		}
+		
+		function
+		main ()
+		{	
+			removeCache ();
+
+		  gApplication = new neutrino.Application ();
+		  
+		  gApplication.latitude = 37.770983;
+			gApplication.longitude = -122.450566;
+		  gApplication.nuRootJanxContext.put ("application.latitude", gApplication.latitude);
+		  gApplication.nuRootJanxContext.put ("application.longitude", gApplication.longitude);
+		  
+		  gApplication.nuTaglets ["sfbw-event"] = new EventTaglet ();
+		  
+			gApplication.start ();
+			
+			checkViewport ();
+		}
+		
+		document.addEventListener ("DOMContentLoaded", main, false);
+		
+		
+		if(window.attachEvent) {
+	    window.attachEvent('onresize', function() {
+	    	//console.log(checkViewport ());
+	    	checkViewport ();
+	    });
+		}
+		else if(window.addEventListener) {
+	    window.addEventListener('resize', function() {
+	    	//console.log(checkViewport ());
+	    	checkViewport ();
+	    }, true);
+		}
+    
+    </script>
+    
+  </head>
+  
+  <body nu-app="SFBW15" class="">
+  
+  	<div id="fb-root"></div>
+		<script>
+			window.fbAsyncInit = function() {
+		    FB.init({
+		      appId: '465285616815546',
+		      status: true, 
+		      cookie: true, 
+		      xfbml: true, 
+		      oauth:true, 
+		      channelUrl: 'http://www.sfbeerweek.org/cms/wp-content/plugins/wp-fb-autoconnect/assets/channel.html'
+		    });
+		  };
+		  
+		  // Load the SDK Asynchronously
+			(function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) return;
+			  js = d.createElement(s); js.id = id;
+			  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=465285616815546";
+			  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
+		
+		<div id="overlay" nu-view="overlay" nu-dynamic="true" class="overlay nu-invisible"></div>
+  
+  	<header>  	
+       <nav class="global-nav clearfix">
+       	 <div
+       	 	 nu-action-1="showview: overlay"
+       	 	 nu-action-1-params="section: navigation;" 
+       	 	 class="left btn menu visibility-mobile"
+       	 	>&#9776;</div>
+	       <ul class="nav inline-items">
+	       	 <li class="logo">
+	       	 	 <a href="#">
+		       	 	 <img src="img/sfbw_abbv_logo.svg" alt="Home">
+	       	 	 </a>
+	       	 </li>
+		       <li class="active"><a href="#">Schedule</a></li>
+		       <li><a href="#">Sponsors</a></li>
+		       <li><a href="#">Info</a></li>
+	       </ul>
+	       
+	       <ul class="nav inline-items right">
+		       <li><a href="#">Log In</a></li>
+		       <li><a href="#">Register</a></li>
+	       </ul>
+      </nav>     
+    </header>
+    
+    <nav class="sub-nav clearfix">
+      <ul class="nav inline-items">
+
+      	<li class="search visibility-mobile">
+      	 	<form action="#">
+			       <span 
+			       	class="ding"
+			       	nu-action-1="(tap) addclass: active/.search.visibility-mobile"
+						 	nu-action-2="(tap) removeclass: hidden/.search-close"
+						 	nu-action-3="(tap) addclass: noscroll/.sub-nav .nav"
+			       >&#115;</span>
+			       <input type="text" placeholder="Search all events...">
+			       <span 
+			       	class="search-close hidden"
+			       	nu-action-1="(tap) addclass: hidden/$this"
+			       	nu-action-2="(tap) removeclass: active/.search.visibility-mobile"
+			       	nu-action-3="(tap) removeclass: noscroll/.sub-nav .nav"
+			       >&times;</span>
+		       </form>
+      	 </li>
+	       <li
+	       	 nu-action-1="(tap) showview: overlay"
+	       	 nu-action-1-params="filter-type: region;"
+	       	 nu-action-2="(tap) removeclass: active/.sub-nav li.selector"
+	       	 nu-action-3="(tap) addclass: active/$this"
+	       	 class="region selector"
+	       >
+	       	 San Francisco
+	       	 <span class="ding"></span>
+	       </li>
+	       <li
+	       	 nu-action-1="(tap) showview: overlay"
+	       	 nu-action-1-params="filter-type: date;"
+	       	 nu-action-2="(tap) removeclass: active/.sub-nav li.selector"
+	       	 nu-action-3="(tap) addclass: active/$this" 
+	       	 class="date selector"
+	       >
+	       	 All Dates
+	       	 <span class="ding"></span>
+	       </li>
+	       <li
+	       	 nu-action-1="(tap) showview: overlay"
+	       	 nu-action-1-params="filter-type: type;"
+	       	 nu-action-2="(tap) removeclass: active/.sub-nav li.selector"
+	       	 nu-action-3="(tap) addclass: active/$this" 
+	       	 class="event-type selector visibility-mobile"
+	       >
+	       	 All Event Types 
+	         <span class="ding"></span>
+	       </li>
+	       <li
+	       	 nu-action-1="(tap) showview: overlay"
+	       	 nu-action-1-params="filter-type: time;"
+	       	 nu-action-2="(tap) removeclass: active/.sub-nav li.selector"
+	       	 nu-action-3="(tap) addclass: active/$this" 
+	       	 class="time selector visibility-mobile"
+	       >
+	       	 All Times 
+	       	 <span class="ding"></span>
+	       </li>
+	       <li
+	       	 nu-action-1="(tap) showview: overlay"
+	       	 nu-action-1-params="filter-type: venue;"
+	       	 nu-action-2="(tap) removeclass: active/.sub-nav li.selector"
+	       	 nu-action-3="(tap) addclass: active/$this" 
+	       	 class="venues selector visibility-mobile"
+	       >
+	       	 All Venues 
+	       	 <span class="ding"></span>
+	       </li>
+	       <li class="search">
+		       <form action="#">
+			       <span class="ding">&#115;</span><input type="text" placeholder="Search all events...">
+		       </form>
+	       </li>
+	       <li class="clear-filters hidden">Clear Filters</li>
+       </ul>
+    </nav>
+		
+		<main>
+			
+	  	<div class="columns-container">
+	  	
+	  		<div 
+	  			nu-action-1="(tap) hideview: single/nu-slide-out-to-right"
+		  		nu-action-2="(tap) removeclass: contract/.columns-container"
+		  		nu-action-3="(tap) addclass: filter-expanded/.columns-container"
+		  		nu-action-4="(tap) removeclass: active/#list .event"
+	  			class="rail"
+	  		>		  		
+		  		<div class="filters">
+		  			<div class="filter-icon ding">4</div>
+			  		<div class="filter-set filter-event-type">
+				  		<h3>Event Type
+					  		<span 
+					  			class="clear"
+					  			nu-action-1="(tap) removeclass: active/.filter-event-type li"
+					  		>Clear</span>
+				  		</h3>
+				  		<ul>
+					    	<li nu-action-1="(tap) toggleclass: active/$this">Beer Dinner <span class="count">13</span></li>
+					    	<li nu-action-1="(tap) toggleclass: active/$this">Beer Style Theme</li>
+					    	<li nu-action-1="(tap) toggleclass: active/$this">Educational</li>
+					    	<li nu-action-1="(tap) toggleclass: active/$this">Festival</li>
+					    	<li nu-action-1="(tap) toggleclass: active/$this" class="active">Fundraiser</li>
+					    	<li nu-action-1="(tap) toggleclass: active/$this">Meet the Brewers</li>
+					    	<li nu-action-1="(tap) toggleclass: active/$this">Outdoor Activity</li>
+					    	<li nu-action-1="(tap) toggleclass: active/$this" class="active">Special Release</li>
+					    	<li nu-action-1="(tap) toggleclass: active/$this">Sponsored Events</li>
+					    	<li nu-action-1="(tap) toggleclass: active/$this">Tap Takeover</li>
+					    	<li nu-action-1="(tap) toggleclass: active/$this">Tour</li>
+				    	</ul>
+			  		</div>
+			  		
+			  		<div class="filter-set filter-time">
+				  		<h3>Time
+					  		<span 
+					  			class="clear"
+					  			nu-action-1="(tap) removeclass: active/.filter-time li"
+					  		>Clear</span>
+				  		</h3>
+				  		<ul>
+					    	<li nu-action-1="(tap) toggleclass: active/$this">Morning</li>
+					    	<li nu-action-1="(tap) toggleclass: active/$this">Afternoon</li>
+					    	<li nu-action-1="(tap) toggleclass: active/$this">Evening</li>
+					    	<li nu-action-1="(tap) toggleclass: active/$this">Late Night</li>
+					    	<li nu-action-1="(tap) toggleclass: active/$this">Right Now</li>
+				    	</ul>
+			  		</div>
+		  		</div>
+		  		
+	  		</div>
+	
+		  	<div class="left-column">
+		  	
+		  		<div id="feature" nu-view="feature:" nu-dynamic="true" class="nu-invisible"></div>
+		  	
+		  		<div id="list">
+		  		
+		  			<div id="event-loader" class="loader">
+							<span><img src="https://sfbeerweek.s3-us-west-1.amazonaws.com/images/loader.gif" width="36" height="36"></span>
+						</div>
+			  				  		
+			  		<div nu-view="listview:" nu-dynamic="true">
+							<div
+								nu-view="eeljson:j"
+								nu-dynamic="true"
+								xclass="nu-invisible"
+								url="http://www.sfbeerweek.org/json/"
+								localstorage="true"
+								content-selector=".events"
+								hidden-selector=".events-hidden"
+								template-selector=".events-template"
+								pageattribute="pg"
+								countattribute="count"
+								loadsize="30"
+								loadthreshold="15"
+								optimise="true"
+								expandafterspacer="false"
+								style="display: none;"
+								>
+							</div>
+						</div>
+						
+						<ul class="events-hidden" style="display: none;"></ul>
+						
+						<ul class="events eventlist"></ul>
+					
+						<div class="events-template nu-template" style="display: none;">
+						
+							<li
+								class="event" 
+								data-index="$post.index;"
+								data-id="$post.id;"
+							>
+								<div class="event-icon">
+									<nu:ifnot lhs="$post.icon;" rhs="">
+										<nu:img src="$post.icon;" width="80" height="auto"></nu:img>
+									</nu:ifnot>
+								</div>
+								<div class="event-details">
+									<div class="event-name">$post.title;</div>	
+									<div class="event-venue">$post.venue;</div>
+									<div class="event-address">$post.address;, $post.city;</div>
+									<div class="event-when clearfix">
+										<div class="event-dates">$post.date_slug;</div>
+										<div class="event-time">$post.time_slug;</div>
+									</div>
+									<div class="event-distance visibility-mobile">
+										<nu:distance
+											lat1="$application.latitude;"
+											lon1="$application.longitude;"
+											lat2="$post.lat;"
+											lon2="$post.lng;"
+											prefix="distance"
+										>
+											<nu:numberformat value="$distance.mi;" type="fixed" digits="1" prefix="numberformat">
+												$numberformat.value; mi
+											</nu:numberformat>
+										</nu:distance>
+									</div>
+							
+								</div>
+							</li>
+						</div>
+					
+		  		</div>
+
+		  	</div>
+
+				<div 
+		  		nu-view="single" 
+		  		class="right-column single-event nu-invisible"
+		  	></div>
+	
+	  	</div>
+	  	
+		</main>
+
+    <footer></footer>
+
+  </body>
+</html>

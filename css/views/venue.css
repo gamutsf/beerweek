@@ -1,0 +1,35 @@
+.venue {
+	z-index: 100;
+	position: relative;
+	top: 0px;
+	height: 60%;
+	background: #FFF;
+	/* min-height: -webkit-calc(50vh); */
+}
+
+.venue .eventlist {
+	top:0px;
+}
+	.venue .eventlist .event.current,
+	.venue .eventlist .event.current .event-block { background: #eefdff !important; }
+	
+	.venue .eventlist .event-details {
+		display: block;
+	}
+	
+.venue #list {
+	min-height: 100px;
+	height: auto;
+	/* height: -webkit-calc(50vh); */
+}
+.venue #list .listmeta {
+	padding: 6px 0;
+	font-size: 12px;
+}
+	.venue #list li {
+		transform: translate3d(0,0,0);
+	}
+
+.venue #venue-loader {
+	position: absolute;
+}
